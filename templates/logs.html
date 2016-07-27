@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+
+    <link rel="shortcut icon" href="" />
+    <title>iLib</title>
+</head>
+<body>
+<div class="container">
+    <h3 class="">LOGS</h3>
+    <a href="/dashboard/">Back to dashboard.</a>
+    <hr>
+    <table class="table table-striped">
+        <tr>
+            <th>Log</th>
+            <th>Action</th>
+        </tr>
+        {% for log in logs %}
+            <tr>
+                {% if log.request_status %}
+                <td>{{ log.full_name }} requests to borrow {{ log.book.title }}.</td>
+                <td>
+                    <form action="/accept/" method="POST" class="col-xs-2"> {% csrf_token %}
+                        <input name="logid" type="hidden" value="{{log.id}}">
+                        <input name="bookid" type="hidden" value="{{log.book.id}}">
+                        <input type="submit" class="btn btn-success" value="ACCEPT">
+                    </form>
+                    <form action="/cancel/" method="POST" class="col-xs-2"> {% csrf_token %}
+                        <input name="logid" type="hidden" value="{{log.id}}">
+                        <input name="bookid" type="hidden" value="{{log.book.id}}">
+                        <input type="submit" class="btn btn-danger" value="DECLINE">
+                    </form>
+                </td>
+                {% else %}
+                <td>{{ log.full_name }} has not yet returned {{ log.book.title }}.</td>
+                <td>
+                    <form action="/returned/" method="POST" class="col-xs-2"> {% csrf_token %}
+                        <input name="logid" type="hidden" value="{{log.id}}">
+                        <input name="bookid" type="hidden" value="{{log.book.id}}">
+                        <input type="submit" class="btn btn-warning" value="RETURNED">
+                    </form>
+                </td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
