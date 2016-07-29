@@ -1,0 +1,94 @@
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+h2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 35px;
+  font-weight: 300;
+}
+
+h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+h4 {
+  font-family: 'Lato', sans-serif;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+p, a, input {
+	font-family: 'Lato', sans-serif;
+  	font-size: 18px;
+}
+
+.margin-bottom-5vh {
+	margin-bottom: 5vh;
+}
+
+.section-content {
+	padding: 5vh 0;
+	width: 100%;
+}
+
+.form-control {
+	border-radius: 0px;
+	color: blue;
+}
+
+
+
+
+
+.stage-bg {
+	background: url('/static/img/bg3.png') no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	background-attachment: fixed;
+	padding: 0;
+	height: auto;
+	min-height: 100vh;
+}
+
+.stage-bg__text-container {
+	background-color: rgb(255,255,255);
+	height: auto;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+.padding-0 {
+	padding: 0;
+	overflow: hidden;
+}
+
+.font-size-16 {
+	font-size: 16px;
+}
+
+.font-size-14 {
+	font-size: 14px;
+}
+
+.text-gray {
+	color: #8c8c8c;
+}
+
+
+
+
+
+.sign-up-bg__text-container {
+	background-color: #fff;
+	height: auto;
+	min-height: 100vh;
+	color: blue;
+	display: flex;
+	align-items: center;
+}
