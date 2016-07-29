@@ -27,6 +27,15 @@ p, a, input {
   	font-size: 18px;
 }
 
+.margin-top-bottom-30 {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.margin-bottom-30 {
+	margin-bottom: 30px;
+}
+
 .margin-bottom-5vh {
 	margin-bottom: 5vh;
 }
@@ -38,7 +47,6 @@ p, a, input {
 
 .form-control {
 	border-radius: 0px;
-	color: blue;
 }
 
 
@@ -91,4 +99,69 @@ p, a, input {
 	color: blue;
 	display: flex;
 	align-items: center;
+}
+
+
+
+
+.menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu__item {
+	display: inline-block;
+	float: left;
+}
+
+.menu__item a {
+	color: white;
+	display: block;
+	font-size: 14px;
+	font-weight: 300;
+	padding: 10px 15px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: 'Montserrat';
+	letter-spacing: 2px;
+}
+
+.site-nav nav {
+	float: right;
+}
+
+.stage-content {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	width: 100%;
+}
+
+.site-logo {
+	margin: 0;	
+	display: flex;
+	align-items: center;
+	padding: 5px 0px;
+}
+
+.mySearch {
+	height: 55px;
+	background: transparent;
+	font-size: 25px;
+	border: none;
+	box-shadow: none;
+	background: #f2f2f2;
+	color: #13133a;
+	font-family: 'Montserrat';
+}
+
+.giveMeEllipsis {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 4; /* number of lines to show */
+   line-height: 18px;        /* fallback */
+   max-height: 72px;       /* fallback */
 }
