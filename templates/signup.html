@@ -5,11 +5,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
     <!-- Bootstrap -->
@@ -19,36 +26,61 @@
     <title>iLib Signup</title>
 </head>
 <body>
- <div class="container">
-        <form action="/signup/" method="post">{% csrf_token %}
-            <div class="row">
-                <div class="col-xs-offset-4 col-xs-4">
-                    <h3 class="text-center"><strong>SIGNUP</strong></h3>
-                    <hr>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary form-control">Signup</button>
-                    <hr>
-                    {% if message == None %}
+    <section class="sign-up">
+        <div class="container sign-up-bg__text-container">
+            <div class="section-content">
+                <form action="/signup/" method="post">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10">
+                            <h1>Create account</h1>
+                            <p class="text-gray">
+                                Welcome to Zeebuks!<br>
+                                Enter your information below to open an account.
+                            </p>
+                            <hr>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary form-control">Signup</button>
+                            <hr>
 
-                    {% else %}
-                        <div class="form-group">
-                            <div class="alert alert-danger" role="alert">{{ message }}</div>
+                            {% if message == None %}
+
+                            {% else %}
+                                <div class="form-group">
+                                    <div class="alert alert-danger" role="alert">{{ message }}</div>
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-xs-offset-3 col-xs-6">
+                        <div style="margin-top: 10vh">
+                            <hr>
+                            <p class="text-center font-size-14 text-gray">&copy; 2016. Zeebuks. All rights reserved.</p>
+                            <p class="text-center font-size-14 text-gray"><a class="font-size-14 text-gray" href="">Terms</a> | <a class="font-size-14 text-gray" href="">Privacy</a> | <a class="font-size-14 text-gray" href="">Feedback</a></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </div> <!-- end of section-content -->
+        </div> <!-- end of sign-up-bg__text-container -->    
+    </section>
 </body>
 </html>
