@@ -38,10 +38,10 @@
                             <nav>
                                 <ul class="menu">
                                     <li class="menu__item">
-                                        <a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                        <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
                                     </li>
                                     <li class="menu__item">
-                                        <a href="#"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                        <a href="{% if user.is_staff %}/logs/{% else %}#{% endif %}"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
                                     </li>
                                     <li class="menu__item">
                                         <a href="#"><span class="glyphicon glyphicon-user"></span> Account</a>
@@ -56,99 +56,105 @@
                 </div>
             </div>
         </header>
-    </div>
 
-    <div class="container">
-        <!-- <h3 class="text-center">Dashboard {{ user.username }}</h3> -->
-        <section class="margin-top-bottom-30">
-            <form action="/search/" method="POST"> {% csrf_token %}
-                <input name="search" type="text" class="form-control mySearch" placeholder="Search book...">
-            </form>
+        <section>
+            <div class="container">
+                <!-- <h3 class="text-center">Dashboard {{ user.username }}</h3> -->
+                <section class="margin-top-bottom-30">
+                    <form action="/search/" method="POST"> {% csrf_token %}
+                        <input name="search" type="text" class="form-control mySearch" placeholder="Search book...">
+                    </form>
+                </section>
+
+                {% if user.is_staff %}
+                <section>
+                    <div class="col-xs-4 padding-0">
+                        <a href="/addbooks/"><button id="addbooksbtn" class="btn-primary btn form-control">ADD BOOKS</button></a>
+                    </div>
+                    <div class="col-xs-4 padding-0">
+                         <a href="/logs/"><button id="requestbooksbtn" class="btn-info btn form-control">ALL REQUEST</button></a>
+                    </div>
+                    <div class="col-xs-4 padding-0">
+                        <a href="/logs/"><button id="deletebooksbtn" class="btn-warning btn form-control">SEE LOGS</button></a>
+                    </div>
+                </section>   
+                {% else %}
+
+                {% endif %}
+                
+                <!-- <form action="/search/" method="POST"> {% csrf_token %}
+                    <div class="form-group col-xs-8">
+                        <input name="search" type="text" class="form-control" placeholder="Search book...">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="submit" class="form-control btn btn-success" value="SEARCH">
+                    </div>
+                </form>
+                <hr> -->
+                <table class="table table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Abstract</th>
+                        <th>Published Date</th>
+                        <th>No. of Reads</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for book in books %}
+                    <tr id="bookrow{{book.id}}">
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.abstract }}</td>
+                        <td>{{ book.date_added }}</td>
+                        <td>{{ book.reads}}</td>
+                        {% if book.stat %}
+                            <td>Available</td>
+                        {% else %}
+                            <td>Not Available</td>
+                        {% endif %}
+                        <td>
+                            {% if user.is_staff %}
+                            <form action="/editbook/" method="GET"> {% csrf_token %}
+                                <input name="bookid" type="hidden" value="{{book.id}}">
+                                <input type="submit" class="btn btn-primary form-control" value="EDIT">
+                            </form>
+                            <form action="/deletebook/" method="POST"> {% csrf_token %}
+                                <input name="bookid" type="hidden" value="{{book.id}}">
+                                <input type="submit" class="btn btn-danger form-control" value="DELETE">
+                            </form>
+                            {% endif %}
+                            {% if book.stat %}
+                                <form action="/borrow/" method="POST"> {% csrf_token %}
+                                    <input name="bookid" type="hidden" value="{{book.id}}">
+                                    <input type="submit" class="btn btn-warning form-control" value="BORROW">
+                                </form>
+                            {% else %}
+                                {% for log in logs %}
+                                    {% if book.id == log.book.id %}
+                                        {% if log.request_status %}
+                                            <form action="/cancel/" method="POST"> {% csrf_token %}
+                                                <input name="logid" type="hidden" value="{{log.id}}">
+                                                <input name="bookid" type="hidden" value="{{book.id}}">
+                                                <input type="submit" class="btn btn-warning form-control" value="CANCEL">
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr>
+                <a class="" href="/logout/">Logout</a>
+            </div>
         </section>
 
-        {% if user.is_staff %}
-        <section>
-            <div class="col-xs-4 padding-0">
-                <a href="/addbooks/"><button id="addbooksbtn" class="btn-primary btn form-control">ADD BOOKS</button></a>
-            </div>
-            <div class="col-xs-4 padding-0">
-                 <a href="/logs/"><button id="requestbooksbtn" class="btn-info btn form-control">ALL REQUEST</button></a>
-            </div>
-            <div class="col-xs-4 padding-0">
-                <a href="/logs/"><button id="deletebooksbtn" class="btn-warning btn form-control">SEE LOGS</button></a>
-            </div>
-        </section>   
-        {% else %}
 
-        {% endif %}
-        
-        <!-- <form action="/search/" method="POST"> {% csrf_token %}
-            <div class="form-group col-xs-8">
-                <input name="search" type="text" class="form-control" placeholder="Search book...">
-            </div>
-            <div class="form-group col-xs-4">
-                <input type="submit" class="form-control btn btn-success" value="SEARCH">
-            </div>
-        </form>
-        <hr> -->
-        <table class="table table-striped">
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Abstract</th>
-                <th>Published Date</th>
-                <th>No. of Reads</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            {% for book in books %}
-            <tr id="bookrow{{book.id}}">
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.abstract }}</td>
-                <td>{{ book.date_added }}</td>
-                <td>{{ book.reads}}</td>
-                {% if book.stat %}
-                    <td>Available</td>
-                {% else %}
-                    <td>Not Available</td>
-                {% endif %}
-                <td>
-                    {% if user.is_staff %}
-                    <form action="/editbook/" method="GET"> {% csrf_token %}
-                        <input name="bookid" type="hidden" value="{{book.id}}">
-                        <input type="submit" class="btn btn-primary form-control" value="EDIT">
-                    </form>
-                    <form action="/deletebook/" method="POST"> {% csrf_token %}
-                        <input name="bookid" type="hidden" value="{{book.id}}">
-                        <input type="submit" class="btn btn-danger form-control" value="DELETE">
-                    </form>
-                    {% endif %}
-                    {% if book.stat %}
-                        <form action="/borrow/" method="POST"> {% csrf_token %}
-                            <input name="bookid" type="hidden" value="{{book.id}}">
-                            <input type="submit" class="btn btn-warning form-control" value="BORROW">
-                        </form>
-                    {% else %}
-                        {% for log in logs %}
-                            {% if book.id == log.book.id %}
-                                {% if log.request_status %}
-                                    <form action="/cancel/" method="POST"> {% csrf_token %}
-                                        <input name="logid" type="hidden" value="{{log.id}}">
-                                        <input name="bookid" type="hidden" value="{{book.id}}">
-                                        <input type="submit" class="btn btn-warning form-control" value="CANCEL">
-                                    </form>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        <hr>
-        <a class="" href="/logout/">Logout</a>
     </div>
+
+    
 </body>
 </html>

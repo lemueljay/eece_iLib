@@ -22,6 +22,12 @@ h4 {
   font-weight: 300;
 }
 
+h5 {
+	font-family: 'Lato', sans-serif;
+  	font-size: 20px;
+  	font-weight: 300;
+}
+
 p, a, input {
 	font-family: 'Lato', sans-serif;
   	font-size: 18px;
@@ -47,6 +53,14 @@ p, a, input {
 
 .form-control {
 	border-radius: 0px;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
 }
 
 
@@ -146,14 +160,15 @@ p, a, input {
 }
 
 .mySearch {
-	height: 55px;
+	height: 45px;
 	background: transparent;
 	font-size: 25px;
 	border: none;
 	box-shadow: none;
 	background: #f2f2f2;
 	color: #13133a;
-	font-family: 'Montserrat';
+	font-family: 'Lato';
+	font-weight: 500;
 }
 
 .giveMeEllipsis {

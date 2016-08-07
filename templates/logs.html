@@ -6,10 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
     <!-- Bootstrap -->
@@ -19,44 +26,181 @@
     <title>iLib</title>
 </head>
 <body>
-<div class="container">
-    <h3 class="">LOGS</h3>
-    <a href="/dashboard/">Back to dashboard.</a>
-    <hr>
-    <table class="table table-striped">
-        <tr>
-            <th>Log</th>
-            <th>Action</th>
-        </tr>
-        {% for log in logs %}
-            <tr>
-                {% if log.request_status %}
-                <td>{{ log.full_name }} requests to borrow {{ log.book.title }}.</td>
-                <td>
-                    <form action="/accept/" method="POST" class="col-xs-2"> {% csrf_token %}
-                        <input name="logid" type="hidden" value="{{log.id}}">
-                        <input name="bookid" type="hidden" value="{{log.book.id}}">
-                        <input type="submit" class="btn btn-success" value="ACCEPT">
-                    </form>
-                    <form action="/cancel/" method="POST" class="col-xs-2"> {% csrf_token %}
-                        <input name="logid" type="hidden" value="{{log.id}}">
-                        <input name="bookid" type="hidden" value="{{log.book.id}}">
-                        <input type="submit" class="btn btn-danger" value="DECLINE">
-                    </form>
-                </td>
-                {% else %}
-                <td>{{ log.full_name }} has not yet returned {{ log.book.title }}.</td>
-                <td>
-                    <form action="/returned/" method="POST" class="col-xs-2"> {% csrf_token %}
-                        <input name="logid" type="hidden" value="{{log.id}}">
-                        <input name="bookid" type="hidden" value="{{log.book.id}}">
-                        <input type="submit" class="btn btn-warning" value="RETURNED">
-                    </form>
-                </td>
-                {%endif%}
-            </tr>
-        {% endfor %}
-    </table>
-</div>
+    <div class="activity-logs">
+        <header style="background: #004d4d">
+            <div class="site-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a class="site-logo" href="#"><img src="{% static 'img/myLogo.png' %}" alt=""></a>
+                        </div>
+                        <div class="col-md-10">
+                            <nav>
+                                <ul class="menu">
+                                    <li class="menu__item">
+                                        <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="#"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="container">
+                <!-- <h1 class="">Activity Logs</h1>
+                <a href="/dashboard/">Back to dashboard.</a>
+                <hr>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Log</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for log in logs %}
+                        <tr>
+                            {% if log.request_status %}
+                            <td>{{ log.full_name }} requests to borrow {{ log.book.title }}.</td>
+                            <td>
+                                <form action="/accept/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
+                                    <input name="logid" type="hidden" value="{{log.id}}">
+                                    <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                    <input type="submit" class="btn btn-success border-radius-0" value="ACCEPT">
+                                </form>
+                                <form action="/cancel/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
+                                    <input name="logid" type="hidden" value="{{log.id}}">
+                                    <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                    <input type="submit" class="btn btn-danger" value="DECLINE">
+                                </form>
+                            </td>
+                            {% else %}
+                            <td>{{ log.full_name }} has not yet returned {{ log.book.title }}.</td>
+                            <td>
+                                <form action="/returned/" method="POST" class="col-xs-2"> {% csrf_token %}
+                                    <input name="logid" type="hidden" value="{{log.id}}">
+                                    <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                    <input type="submit" class="btn btn-warning" value="RETURNED">
+                                </form>
+                            </td>
+                            {%endif%}
+                        </tr>
+                    {% endfor %}
+                </table> -->
+
+                <h1>Activity Logs</h1>
+                <!-- <a href="/dashboard/">Back to dashboard.</a> -->
+                <a class="text-gray font-size-14 text-uppercase" href="">View history logs</a>
+
+                <!-- <div class="row">
+                    <div class="col-md-2 col-sm-3 col-xs-6">
+                        <a href="/logs/"><button id="deletebooksbtn" class="btn-warning btn form-control">HISTORY</button></a>
+                    </div>
+                </div> -->
+                
+                <div class="row">
+                    <div class="col-md-6 col-md-12">
+                        <hr>            
+                        <h5 class="text-uppercase">Book Requests</h5>
+                        <div class="col-md-12 padding-0 margin-bottom-30">
+                            <form action="#" method="POST"> {% csrf_token %}
+                                <input name="search" type="text" class="form-control" placeholder="Search...">
+                            </form>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Details</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for log in logs %}
+                                <tr>
+                                    <!-- {% if log.request_status %} -->
+                                    <td><a href="">{{ log.full_name }}</a> requests to borrow <p class="text-gray">{{ log.book.title }}</p></td>
+                                    <td>
+                                        <form action="/accept/" method="POST" class="col-md-4 col-sm-3 col-xs-12 padding-0"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                           <!--  <input type="submit" class="btn btn-success border-radius-0" value="ACCEPT"> -->
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
+                                        </form>
+                                        <form action="/cancel/" method="POST" class="col-md-4 col-sm-3 col-xs-12 padding-0"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <!-- <input type="submit" class="btn btn-danger" value="DECLINE"> -->
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </form>
+                                    </td>
+                                    <!-- {% else %}
+                                    <td>{{ log.full_name }} has not yet returned {{ log.book.title }}.</td>
+                                    <td>
+                                        <form action="/returned/" method="POST" class="col-xs-2"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <input type="submit" class="btn btn-warning" value="RETURNED">
+                                        </form>
+                                    </td>
+                                    {%endif%} -->
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                    <div class="col-md-6 col-md-12">
+                        <hr>
+                        <h5 class="text-uppercase">Book Returns</h5>
+                        <div class="col-md-12 padding-0 margin-bottom-30">
+                            <form action="#" method="POST"> {% csrf_token %}
+                                <input name="search" type="text" class="form-control" placeholder="Search...">
+                            </form>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Details</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for log in logs %}
+                                <tr>
+                                    <!-- {% if log.request_status %}
+                                    <td><a href="">{{ log.full_name }}</a> requests to borrow {{ log.book.title }}.</td>
+                                    <td>
+                                        <form action="/accept/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <input type="submit" class="btn btn-success border-radius-0" value="ACCEPT">
+                                        </form>
+                                        <form action="/cancel/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <input type="submit" class="btn btn-danger" value="DECLINE">
+                                        </form>
+                                    </td>
+                                    {% else %} -->
+                                    <td><a href="">{{ log.full_name }}</a> has not yet returned <p class="text-gray">{{ log.book.title }}</p></td>
+                                    <td>
+                                        <form action="/returned/" method="POST" class="col-xs-12 padding-0"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <input type="submit" class="btn btn-warning" value="RETURNED">
+                                        </form>
+                                    </td>
+                                    <!-- {%endif%} -->
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
 </body>
 </html>
