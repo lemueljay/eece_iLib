@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^returned/$', returned),
     url(r'^logs/$', logs),
     url(r'^search/$', search),
+    url(r'^account/$', account),
+    url(r'^account-password/$', account_password),
 ]

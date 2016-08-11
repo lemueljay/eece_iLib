@@ -167,6 +167,12 @@ def logs(request):
         x.full_name = x.user.get_full_name()
     return render(request, 'logs.html', {'logs': logs})
 
+def account(request):
+    return render(request, 'account.html')
+
+def account_password(request):
+    return render(request, 'account-password.html')
+
 
 def search(request):
     if request.method == 'POST':

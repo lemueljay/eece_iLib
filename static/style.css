@@ -129,6 +129,11 @@ p, a, input {
 	float: left;
 }
 
+.menu__item--account {
+	clear: both;
+	display: block;
+}
+
 .menu__item a {
 	color: white;
 	display: block;
@@ -140,6 +145,18 @@ p, a, input {
 	text-transform: uppercase;
 	font-family: 'Montserrat';
 	letter-spacing: 2px;
+}
+
+.menu__item--account a {
+	color: #546583;
+	font-size: 18px;
+	padding: 1rem 0;
+}
+
+.menu__item--account a:hover {
+	color: black;
+	font-size: 18px;
+	padding: 1rem 0;
 }
 
 .site-nav nav {
@@ -165,10 +182,17 @@ p, a, input {
 	font-size: 25px;
 	border: none;
 	box-shadow: none;
-	background: #f2f2f2;
 	color: #13133a;
 	font-family: 'Lato';
 	font-weight: 500;
+	padding: 0 1rem;
+}
+
+.mySearch:focus {
+	border-color: transparent;
+	background: white;
+	outline: 0;
+    box-shadow: none;
 }
 
 .giveMeEllipsis {
@@ -179,4 +203,76 @@ p, a, input {
    -webkit-line-clamp: 4; /* number of lines to show */
    line-height: 18px;        /* fallback */
    max-height: 72px;       /* fallback */
+}
+
+
+
+
+
+
+
+
+.booking-bg {
+	/*background: url('/static/img/bg1.jpg') no-repeat;*/
+	background-color: #e6e6e6;
+	background-size: cover;
+	background-position: center;
+	padding: 0;
+}
+
+.booking-bg__text-container {
+	/*background-color: rgba(0,0,0,0.6);*/
+	padding: 0;
+	color: white;
+}
+
+.search-bg {
+	background: url('/static/img/bg1.jpg') no-repeat;
+	background-color: #e6e6e6;
+	background-size: cover;
+	background-position: center;
+	padding: 0;
+}
+
+.search-bg__text-container {
+	background-color: rgba(0,0,0,0.6);
+	padding: 2rem 0;
+	color: white;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+.account-aside {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+}
+
+.account-img {
+	height: 100px;
+	margin-bottom: 2rem;
+}
+
+
+
+
+
+.flex {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	padding: 0;
+	margin: 0;
+}
+
+.flex__item {
+	margin-top: 3rem;
 }

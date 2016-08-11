@@ -44,10 +44,10 @@
                                         <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
                                     </li>
                                     <li class="menu__item">
-                                        <a href="#"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                        <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
                                     </li>
                                     <li class="menu__item">
-                                        <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                        <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -108,6 +108,7 @@
                 </div> -->
                 
                 <div class="row">
+                {% if user.is_staff %}
                     <div class="col-md-6 col-md-12">
                         <hr>            
                         <h5 class="text-uppercase">Book Requests</h5>
@@ -123,32 +124,23 @@
                             </tr>
                             {% for log in logs %}
                                 <tr>
-                                    <!-- {% if log.request_status %} -->
+                                    {% if log.request_status %}
                                     <td><a href="">{{ log.full_name }}</a> requests to borrow <p class="text-gray">{{ log.book.title }}</p></td>
                                     <td>
                                         <form action="/accept/" method="POST" class="col-md-4 col-sm-3 col-xs-12 padding-0"> {% csrf_token %}
                                             <input name="logid" type="hidden" value="{{log.id}}">
                                             <input name="bookid" type="hidden" value="{{log.book.id}}">
-                                           <!--  <input type="submit" class="btn btn-success border-radius-0" value="ACCEPT"> -->
                                             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
                                         </form>
                                         <form action="/cancel/" method="POST" class="col-md-4 col-sm-3 col-xs-12 padding-0"> {% csrf_token %}
                                             <input name="logid" type="hidden" value="{{log.id}}">
                                             <input name="bookid" type="hidden" value="{{log.book.id}}">
-                                            <!-- <input type="submit" class="btn btn-danger" value="DECLINE"> -->
                                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
                                         </form>
                                     </td>
-                                    <!-- {% else %}
-                                    <td>{{ log.full_name }} has not yet returned {{ log.book.title }}.</td>
-                                    <td>
-                                        <form action="/returned/" method="POST" class="col-xs-2"> {% csrf_token %}
-                                            <input name="logid" type="hidden" value="{{log.id}}">
-                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
-                                            <input type="submit" class="btn btn-warning" value="RETURNED">
-                                        </form>
-                                    </td>
-                                    {%endif%} -->
+                                    {% else %}
+
+                                    {%endif%}
                                 </tr>
                             {% endfor %}
                         </table>
@@ -169,21 +161,9 @@
                             </tr>
                             {% for log in logs %}
                                 <tr>
-                                    <!-- {% if log.request_status %}
-                                    <td><a href="">{{ log.full_name }}</a> requests to borrow {{ log.book.title }}.</td>
-                                    <td>
-                                        <form action="/accept/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
-                                            <input name="logid" type="hidden" value="{{log.id}}">
-                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
-                                            <input type="submit" class="btn btn-success border-radius-0" value="ACCEPT">
-                                        </form>
-                                        <form action="/cancel/" method="POST" class="col-md-3 col-xs-12"> {% csrf_token %}
-                                            <input name="logid" type="hidden" value="{{log.id}}">
-                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
-                                            <input type="submit" class="btn btn-danger" value="DECLINE">
-                                        </form>
-                                    </td>
-                                    {% else %} -->
+                                    {% if log.request_status %}
+
+                                    {% else %}
                                     <td><a href="">{{ log.full_name }}</a> has not yet returned <p class="text-gray">{{ log.book.title }}</p></td>
                                     <td>
                                         <form action="/returned/" method="POST" class="col-xs-12 padding-0"> {% csrf_token %}
@@ -192,11 +172,45 @@
                                             <input type="submit" class="btn btn-warning" value="RETURNED">
                                         </form>
                                     </td>
-                                    <!-- {%endif%} -->
+                                    {%endif%}
                                 </tr>
                             {% endfor %}
                         </table>
                     </div>
+                {% else %}
+                    <div class="col-md-6 col-md-12">
+                        <hr>            
+                        <h5 class="text-uppercase">For Approval</h5>
+                        <div class="col-md-12 padding-0 margin-bottom-30">
+                            <form action="#" method="POST"> {% csrf_token %}
+                                <input name="search" type="text" class="form-control" placeholder="Search...">
+                            </form>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Details</th>
+                                <th>Action</th>
+                            </tr>
+                            
+                        </table>
+                    </div>
+
+                    <div class="col-md-6 col-md-12">
+                        <hr>
+                        <h5 class="text-uppercase">On-hand</h5>
+                        <div class="col-md-12 padding-0 margin-bottom-30">
+                            <form action="#" method="POST"> {% csrf_token %}
+                                <input name="search" type="text" class="form-control" placeholder="Search...">
+                            </form>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Details</th>
+                            </tr>
+                        
+                        </table>
+                    </div>
+                {% endif %}
                 </div>
 
             </div>
