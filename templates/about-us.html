@@ -1,0 +1,182 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+
+    <link rel="shortcut icon" href="" />
+    <title>iLib</title>
+</head>
+<body>
+	<header style="background: #f26f70">
+        <div class="site-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a class="site-logo" href="#"><img src="{% static 'img/myLogo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-10">
+                        <nav>
+                            <ul class="menu">
+                                <li class="menu__item">
+                                    <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    	<section style="background: #f2f2f2">
+			<img class="about-page__head center-block" src="{% static 'img/about-bg.jpg' %}" alt="">
+			<div class="section-content">
+				<div class="container">
+					<h1 class="section-title">About Us</h1><br>
+					<hr style="width: 10%; background-color: #004d4d"><br>
+					<h1 class="section-subtitle section-subtitle--about-page">
+						&ldquo;It’s not wise to violate rules until <br>you know how to observe them.&rdquo;
+					</h1>
+				</div>
+			</div>
+		</section>
+
+		<section style="background: #fff">
+			<div class="section-content">
+				<div class="container">
+					<p class="content-title">
+						Our DNA
+					</p>
+					<p class="content-paragraph">
+						There are a lot of agencies that do what we do. They share the same what and how, but our partners work with us for our why and our who. We’re minds and makers with business sense and creative chops, set out to connect people with what matters most — the experience. And we spend each day doing so by sharpening the tools of the digital trade.
+					</p>
+				</div>
+
+				<div class="container" style="margin-top: 4rem">
+					<p class="content-title">
+						More About Us
+					</p>
+					<div class="row">
+						<div class="col-md-6">
+							<p class="content-paragraph">
+								Jam3 is one of the world’s top digital production and design agencies. We specialize in creating highly advanced, experiential works in both the advertising and entertainment industries.
+							</p>
+							<p class="content-paragraph">
+								We’re a culture of dreamers and doers who prove that the two aren’t mutually exclusive. We’re happiest when we’re innovating, and fanatically dedicated to our craft.
+							</p>
+						</div>
+						<div class="col-md-6">
+							<p class="content-paragraph">
+								We’re known for challenging the way digital stories are told. Our work often incorporates everything from live action, animation and sound design to coded particle systems and complex 3D engines. If it is possible, Jam3 can do it.
+							</p>
+							<p class="content-paragraph">
+								At Jam3, everything is informed by our three core principles: story, craft and technology.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section style="background: #f2f2f2">
+			<div class="section-content">
+				<div class="container">
+					<p class="content-title">
+						About Zeebuks
+					</p>
+					<p class="content-paragraph">
+						This is the fabric of our culture and the framework for all decisions made within these walls. Heads up, they tend to be contagious.
+					</p>
+				</div>
+
+				<div class="core-values">
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Fast & Easy.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							To be genuine, be vulnerable.
+						</p>
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Simplicity.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Simplicity is beauty.
+						</p>
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Efficient.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Dwell on the good.
+						</p>
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Discover.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Take risks and embrace where they take you.
+						</p>
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Innovate.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Build new ideas.
+						</p>
+					<br>
+					<hr style="width: 10%; background-color: #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Appreciation.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Dwell on the good.
+						</p>
+				</div>
+			</div>
+		</section>
+
+    </main>
+</body>
+</html>

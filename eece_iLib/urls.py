@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^search/$', search),
     url(r'^account/$', account),
     url(r'^account-password/$', account_password),
+    url(r'^about-us/$', about),
 ]

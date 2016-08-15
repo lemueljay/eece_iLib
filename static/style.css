@@ -280,6 +280,62 @@ p, a, input {
 
 
 
+
+.section-title {
+	font-size: 45px;
+	color: black;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 500;
+}
+
+.section-subtitle {
+	text-align: center;
+	color: #8c8c8c;
+}
+
+.section-subtitle--about-page {
+	font-family: 'Times New Roman';
+	font-size: 60px;
+}
+
+.about-page__head {
+	height: auto;
+	width: 100%;
+}
+
+.content-title {
+	color: #f26f70;
+	text-transform: uppercase;
+	font-size: 20px;
+	letter-spacing: 10px;
+	font-weight: bold;
+	margin-bottom: 1%;
+}
+
+.core-values__item {
+	font-size: 80px;
+	color: #262626;
+	text-align: center;
+	font-family: 'Lato';
+	font-weight: 300;
+}
+
+.content-paragraph {
+	font-family: 'Times New Roman';
+	font-size: 24px;
+}
+
+.content-paragraph--core {
+	color: gray;
+	text-align: center;
+	font-style: italic;
+}
+
+
+
+
+
 @media (max-width: 720px) {
 	.hideColumn {
 		display: none;

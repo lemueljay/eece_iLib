@@ -173,6 +173,9 @@ def account(request):
 def account_password(request):
     return render(request, 'account-password.html')
 
+def about(request):
+    return render(request, 'about-us.html')
+
 
 def search(request):
     if request.method == 'POST':
