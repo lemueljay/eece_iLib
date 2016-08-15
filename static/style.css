@@ -256,7 +256,7 @@ p, a, input {
 
 .account-img {
 	height: 100px;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 }
 
 
@@ -275,4 +275,13 @@ p, a, input {
 
 .flex__item {
 	margin-top: 3rem;
+}
+
+
+
+
+@media (max-width: 720px) {
+	.hideColumn {
+		display: none;
+	}
 }

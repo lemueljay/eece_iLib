@@ -79,7 +79,7 @@
                             <div class="col-md-12">
                                 <div class="container">
                                     <form action="/search/" method="POST"> {% csrf_token %}
-                                        <input name="search" type="text" class="form-control mySearch" placeholder=" Search book, author, etc...">
+                                        <input name="search" type="text" class="form-control mySearch" placeholder="Search book, author, etc...">
                                     </form>
                                 </div>
                             </div>
@@ -126,9 +126,9 @@
                 <table class="table table-striped">
                     <tr>
                         <th>Title</th>
-                        <th>Author</th>
+                        <th class="hideColumn">Author</th>
                         <th>Abstract</th>
-                        <th>Published Date</th>
+                        <th class="hideColumn">Published Date</th>
                         <th>No. of Reads</th>
                         <th>Status</th>
                         <th>Action</th>
