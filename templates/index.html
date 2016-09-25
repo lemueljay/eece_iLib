@@ -18,9 +18,11 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
     <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 
     <link rel="shortcut icon" href="" />
     <title>iLib</title>
@@ -66,8 +68,8 @@
                                 <div class="col-xs-offset-2 col-xs-8">
                                     <div style="margin-top: 10vh">
                                         <hr>
-                                        <p class="text-center font-size-14 text-gray">&copy; 2016. Zeebuks. All rights reserved.</p>
-                                        <p class="text-center font-size-14 text-gray"><a class="font-size-14 text-gray" href="">About Us</a> | <a class="font-size-14 text-gray" href="">Feedback</a></p>
+                                        <p class="text-center font-size-14 text-gray">&copy; 2016 Zeebuks. All rights reserved</p>
+                                        <p class="text-center font-size-14 text-gray"><a class="font-size-14 text-gray" href="/about-us/">About Us</a> | <a class="font-size-14 text-gray" href="#feedbackModal" role="button" data-toggle="modal">Feedback</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -80,8 +82,38 @@
 
 
 
-    <!-- Welcome!
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a> -->
+
+
+    <div class="modal fade" id="feedbackModal">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content--dark">
+                <div class="modal-header">
+                    <button class="close text-white" data-dismiss="modal">&times;</button>
+                    <h3 class="text-primary margin-0">Feedback</h3>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <form>
+                        <div class="form-group">
+                            <label for="feedback-name" class="sr-only">Complete Name</label>
+                            <input type="password" class="form-control" id="feedback-name" name="feedback-name" placeholder="Complete Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-email" class="sr-only">Email</label>
+                            <input type="password" class="form-control" id="feedback-email" name="feedback-email" placeholder="Email">
+                        </div>
+                        <fieldset class="form-group">
+                            <label class="sr-only">Message</label>
+                            <textarea class="form-control" placeholder="Your Message" rows="5" style="resize: vertical;"></textarea>
+                        </fieldset>
+                        <button type="button" class="btn btn-block btn-primary">Submit Feedback</button>
+                    </form>
+                    <br>
+                </div> <!-- end of modal-body -->
+            </div> <!-- end of modal-content -->
+        </div> <!-- end of modal-dialog -->
+    </div> <!-- end of feedbackModal -->
+
+
 </body>
 </html>
