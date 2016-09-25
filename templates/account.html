@@ -18,23 +18,29 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
     <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 
     <link rel="shortcut icon" href="" />
     <title>iLib</title>
 </head>
 <body>
-	<header style="background: #546583">
+
+    <main>
+    	<header style="background: #131388">
             <div class="site-nav">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-2">
-                            <a class="site-logo" href="#"><img src="{% static 'img/myLogo.png' %}" alt=""></a>
+                            <a href="#"><img class="center-block" src="{% static 'img/zeebuks.png' %}" alt=""></a>
+
+                            <button class="btn btn-info-outline" id="mobile-dropdown"><span class="glyphicon glyphicon-align-justify" style="font-size: 28px"></span></button>
                         </div>
                         <div class="col-md-10">
-                            <nav>
+                            <nav class="nav-header" id="header-desktop">
                                 <ul class="menu">
                                     <li class="menu__item">
                                         <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
@@ -42,11 +48,27 @@
                                     <li class="menu__item">
                                         <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
                                     </li>
-                                    <li class="menu__item">
-                                        <a href="#"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                    <li class="menu__item active">
+                                        <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
                                     </li>
                                     <li class="menu__item">
                                         <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <nav id="header-mobile">
+                                <ul>
+                                    <li>
+                                        <a href="/dashboard/">Dashboard <span class="font-size-14 glyphicon glyphicon-dashboard"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logs/">Activity <span class="font-size-14 glyphicon glyphicon-list-alt"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/account/">Account <span class="font-size-14 glyphicon glyphicon-user"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout/">Logout <span class="font-size-14 glyphicon glyphicon-off"></span></a>
                                     </li>
                                 </ul>
                             </nav>
@@ -61,14 +83,14 @@
         		<div class="row">
         			<div class="col-md-12">
         				<h1>My Account</h1>
-        				<hr>
+        				
         			</div>
         		</div>
         		<div class="row">
         			<div class="col-md-4 col-sm-12">
         				<hr style="color: blue; font-size: 30px">
         				<ul class="menu">
-        					<li class="menu__item menu__item--account">
+        					<li class="menu__item menu__item--account active">
         						<a href="">Profile</a>
         					</li>
         					<li class="menu__item menu__item--account">
@@ -112,11 +134,11 @@
 	                                	<input type="text" class="form-control" id="account-contact" name="firstname">
 		                            </div>
 		                            <div class="form-group">
-		                            	<div class="col-xs-6 padding-0">
+		                            	<div class="col-sm-6 col-xs-12 padding-0">
 		                            		<button type="submit" class="btn btn-primary form-control">Submit <span class="glyphicon glyphicon-send"></span></button>
 		                            	</div>
-		                            	<div class="col-xs-6 text-right">
-		                            		<a class="text-gray font-size-14" href="">Permanently delete my account</a>
+		                            	<div class="col-sm-6 col-xs-12 text-right">
+		                            		<a class="text-gray font-size-14" href=""><br>Permanently delete my account</a>
 		                            	</div>
 		                            </div>			
         						</div>
@@ -124,18 +146,52 @@
         				</form>
         			</div>
         		</div>
-        		<div class="row">
-                    <div class="col-xs-offset-3 col-xs-6">
+        		<div class="row margin-bottom-30">
+                    <div class="col-md-offset-3 col-md-6 col-sm-12">
                         <div style="margin-top: 10vh">
                             <hr>
-                            <p class="text-center font-size-14 text-gray">&copy; 2016. Zeebuks. All rights reserved.</p>
-                            <p class="text-center font-size-14 text-gray"><a class="font-size-14 text-gray" href="/about-us/">About Us</a> | <a class="font-size-14 text-gray" href="">Feedback</a></p>
+                            <p class="text-center font-size-14 text-gray">&copy; 2016 Zeebuks. All rights reserved</p>
+                            <p class="text-center font-size-14 text-gray"><a class="font-size-14 text-gray" href="/about-us/">About Us</a> | <a class="font-size-14 text-gray" href="#feedbackModal" role="button" data-toggle="modal">Feedback</a></p>
                         </div>
                     </div>
                 </div>
         	</div>
         </section>
+    </main>
 
+
+
+
+
+    <div class="modal fade" id="feedbackModal">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content--dark">
+                <div class="modal-header">
+                    <button class="close text-white" data-dismiss="modal">&times;</button>
+                    <h3 class="text-primary margin-0">Feedback</h3>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <form>
+                        <div class="form-group">
+                            <label for="feedback-name" class="sr-only">Complete Name</label>
+                            <input type="password" class="form-control" id="feedback-name" name="feedback-name" placeholder="Complete Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-email" class="sr-only">Email</label>
+                            <input type="password" class="form-control" id="feedback-email" name="feedback-email" placeholder="Email">
+                        </div>
+                        <fieldset class="form-group">
+                            <label class="sr-only">Message</label>
+                            <textarea class="form-control" placeholder="Your Message" rows="5" style="resize: vertical;"></textarea>
+                        </fieldset>
+                        <button type="button" class="btn btn-block btn-primary">Submit Feedback</button>
+                    </form>
+                    <br>
+                </div> <!-- end of modal-body -->
+            </div> <!-- end of modal-content -->
+        </div> <!-- end of modal-dialog -->
+    </div> <!-- end of feedbackModal -->
     
 </body>
 </html>
