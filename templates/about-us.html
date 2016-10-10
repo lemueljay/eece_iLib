@@ -1,0 +1,332 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+
+    <link rel="shortcut icon" href="" />
+    <title>iLib</title>
+</head>
+<body>
+	<header style="background: #f26f70">
+        <div class="site-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="#"><img class="center-block" src="{% static 'img/zeebuks.png' %}" alt=""></a>
+
+                        <button class="btn btn-info-outline" id="mobile-dropdown"><span class="glyphicon glyphicon-align-justify" style="font-size: 28px"></span></button>
+                    </div>
+                    <div class="col-md-10">
+                        <nav class="nav-header" id="header-desktop">
+                            <ul class="menu">
+                                <li class="menu__item">
+                                    <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav id="header-mobile">
+                            <ul>
+                                <li>
+                                    <a href="/dashboard/">Dashboard <span class="font-size-14 glyphicon glyphicon-dashboard"></span></a>
+                                </li>
+                                <li>
+                                    <a href="/logs/">Activity <span class="font-size-14 glyphicon glyphicon-list-alt"></span></a>
+                                </li>
+                                <li>
+                                    <a href="/account/">Account <span class="font-size-14 glyphicon glyphicon-user"></span></a>
+                                </li>
+                                <li>
+                                    <a href="/logout/">Logout <span class="font-size-14 glyphicon glyphicon-off"></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    	<section style="background: #f2f2f2">
+			<img class="about-page__head center-block" src="{% static 'img/about-bg.jpg' %}" alt="">
+			<div class="section-content">
+				<div class="container">
+					<h1 class="section-title">About Us</h1><br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70"><br>
+					<h1 class="section-subtitle section-subtitle--about-page margin-0">
+						&ldquo;It’s not wise to violate rules until <br>you know how to observe them.&rdquo;
+					</h1>
+				</div>
+			</div>
+		</section>
+
+		<section style="background: #fff">
+			<div class="section-content">
+				<div class="container">
+					<p class="content-title">
+						Our DNA
+					</p>
+					<p class="content-paragraph">
+						There are a lot of agencies that do what we do. They share the same what and how, but our partners work with us for our why and our who. We’re minds and makers with business sense and creative chops, set out to connect people with what matters most — the experience. And we spend each day doing so by sharpening the tools of the digital trade.
+					</p>
+				</div>
+
+				<div class="container" style="margin-top: 4rem">
+					<p class="content-title">
+						More About Us
+					</p>
+					<div class="row">
+						<div class="col-md-6">
+							<p class="content-paragraph">
+								Jam3 is one of the world’s top digital production and design agencies. We specialize in creating highly advanced, experiential works in both the advertising and entertainment industries.
+							</p>
+							<p class="content-paragraph">
+								We’re a culture of dreamers and doers who prove that the two aren’t mutually exclusive. We’re happiest when we’re innovating, and fanatically dedicated to our craft.
+							</p>
+						</div>
+						<div class="col-md-6">
+							<p class="content-paragraph">
+								We’re known for challenging the way digital stories are told. Our work often incorporates everything from live action, animation and sound design to coded particle systems and complex 3D engines. If it is possible, Jam3 can do it.
+							</p>
+							<p class="content-paragraph">
+								At Jam3, everything is informed by our three core principles: story, craft and technology.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section style="background: #f2f2f2">
+			<div class="section-content">
+				<div class="container">
+					<p class="content-title">
+						About Zeebuks
+					</p>
+					<p class="content-paragraph">
+						This is the fabric of our culture and the framework for all decisions made within these walls. Heads up, they tend to be contagious.
+					</p>
+				</div>
+
+				<div class="core-values">
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Fast & Easy.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							To be genuine, be vulnerable.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Simple.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Simplicity is beauty.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Efficient.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Dwell on the good.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Discover.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Take risks and embrace where they take you.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Innovate.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Build new ideas.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+						<h1 class="core-values__item">
+							Appreciate.
+						</h1>
+						<p class="content-paragraph content-paragraph--core">
+							Do more with good things.
+						</p>
+					<br>
+					<hr style="width: 10%; border-top: 1px solid #f26f70">
+					<br>
+				</div>
+			</div>
+		</section>
+
+		<section style="background: #f26f70; text-align: center">
+			<div class="section-content">
+				<div class="container">
+					<h1 class="section-title" style="color: white">
+						The Team
+					</h1>
+					<p class="section-subtitle" style="color: #e6e6e6">
+						The lifeblood of PRPL is our people. As a tight-knit team of strategists, creatives, and technologists, we’re devoted to a culture that cultivates, and work that works.
+					</p>
+				</div>
+
+				<div style="margin-top: 3rem">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="{% static 'img/about1.png' %}" alt="" class="centerblock icons">
+								<h5 class="margin-0">Lemuel Jay Vallinas</h5>
+								<p class="font-size-14">CEO Zeebuks</p>
+								<ul class="menu menu--social">
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/googleplus.png' %}" alt=""></a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<img src="{% static 'img/about2.png' %}" alt="" class="centerblock icons">
+								<h5 class="margin-0">Edsel Adelbert Corado</h5>
+								<p class="font-size-14">Bigaon Kaayo</p>
+								<ul class="menu menu--social">
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/googleplus.png' %}" alt=""></a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<img src="{% static 'img/about3.png' %}" alt="" class="centerblock icons">
+								<h5 class="margin-0">Vince Yancy Cadutdut</h5>
+								<p class="font-size-14">Football Player of the Year</p>
+								<ul class="menu menu--social">
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a>
+									</li>
+									<li class="menu__item menu__item--social">
+										<a href=""><img src="{% static 'img/googleplus.png' %}" alt=""></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- end of section-content -->
+		</section>
+
+		<section class="feedback">
+			<div class="container-fluid feedback-bg">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 feedback-bg__text-container">
+							<div class="col-md-6 col-md-offset-3">
+								<h1>Feedback</h1>
+								<br>
+								<p class="text-white">
+									Our headquarters are perfect for hosting public meetups, professional photo shoots, and other private events. Thumb through our facility license agreement and contact us for more information!
+								</p>
+								<br>
+								<a href="#feedbackModal" role="button" data-toggle="modal"><input type="button" class="btn btn-lg btn-danger" value="Give Feedback"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="footer">
+			<div class="container">
+				<p class="font-size-14 text-center">Copyright &copy; 2016 Zeebuks. All rights reserved</p>
+			</div>
+		</section>
+    </main>
+
+
+
+
+	<div class="modal fade" id="feedbackModal">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content--dark">
+                <div class="modal-header">
+                    <button class="close text-white" data-dismiss="modal">&times;</button>
+                    <h3 class="text-primary margin-0">Feedback</h3>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <form>
+                        <div class="form-group">
+                            <label for="feedback-name" class="sr-only">Complete Name</label>
+                            <input type="text" class="form-control" id="feedback-name" name="feedback-name" placeholder="Complete Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-email" class="sr-only">Email</label>
+                            <input type="email" class="form-control" id="feedback-email" name="feedback-email" placeholder="Email">
+                        </div>
+                        <fieldset class="form-group">
+                            <label class="sr-only">Message</label>
+                            <textarea class="form-control" placeholder="Your Message" rows="5" style="resize: vertical;"></textarea>
+                        </fieldset>
+                        <button type="button" class="btn btn-block btn-primary">Submit Feedback</button>
+                    </form>
+                    <br>
+                </div> <!-- end of modal-body -->
+            </div> <!-- end of modal-content -->
+        </div> <!-- end of modal-dialog -->
+    </div> <!-- end of feedbackModal -->
+
+</body>
+</html>

@@ -6,98 +6,177 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.5-dist/css/bootstrap.css' %}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'font-awesome-4.6.1/css/font-awesome.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
     <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'jquery/jquery-1.11.3.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script type="text/javascript" src="{% static 'bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 
     <link rel="shortcut icon" href="" />
     <title>iLib</title>
 </head>
 <body>
-<div class="container">
-    <h3 class="text-center">Dashboard {{ user.username }}</h3>
-    {% if user.is_staff %}
-    <hr>
-    <div>
-        <a href="/addbooks/"><button id="addbooksbtn" class="btn-primary btn form-control">ADD BOOKS</button></a>
-        <a href="/logs/"><button id="deletebooksbtn" class="btn-warning btn form-control">SEE LOGS</button></a>
-    </div>
-    {% else %}
 
-    {% endif %}
-    <hr>
-    <form action="/search/" method="POST"> {% csrf_token %}
-        <div class="form-group col-xs-8">
-            <input name="search" type="text" class="form-control" placeholder="Search book...">
-        </div>
-        <div class="form-group col-xs-4">
-            <input type="submit" class="form-control btn btn-success" value="SEARCH">
-        </div>
-    </form>
-    <hr>
-    <table class="table table-striped">
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Abstract</th>
-            <th>Published Date</th>
-            <th>No. of Reads</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        {% for book in books %}
-        <tr id="bookrow{{book.id}}">
-            <td>{{ book.title }}</td>
-            <td>{{ book.author }}</td>
-            <td>{{ book.abstract }}</td>
-            <td>{{ book.date_added }}</td>
-            <td>{{ book.reads}}</td>
-            {% if book.stat %}
-                <td>Available</td>
-            {% else %}
-                <td>Not Available</td>
-            {% endif %}
-            <td>
-                {% if user.is_staff %}
-                <form action="/editbook/" method="GET"> {% csrf_token %}
-                    <input name="bookid" type="hidden" value="{{book.id}}">
-                    <input type="submit" class="btn btn-primary form-control" value="EDIT">
-                </form>
-                <form action="/deletebook/" method="POST"> {% csrf_token %}
-                    <input name="bookid" type="hidden" value="{{book.id}}">
-                    <input type="submit" class="btn btn-danger form-control" value="DELETE">
-                </form>
-                {% endif %}
-                {% if book.stat %}
-                    <form action="/borrow/" method="POST"> {% csrf_token %}
-                        <input name="bookid" type="hidden" value="{{book.id}}">
-                        <input type="submit" class="btn btn-warning form-control" value="BORROW">
-                    </form>
-                {% else %}
-                    {% for log in logs %}
-                        {% if book.id == log.book.id %}
-                            {% if log.request_status %}
-                                <form action="/cancel/" method="POST"> {% csrf_token %}
-                                    <input name="logid" type="hidden" value="{{log.id}}">
-                                    <input name="bookid" type="hidden" value="{{book.id}}">
-                                    <input type="submit" class="btn btn-warning form-control" value="CANCEL">
+    <div class="dashboard">
+        <header style="background: #131388">
+            <div class="site-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="#"><img class="center-block" src="{% static 'img/zeebuks.png' %}" alt=""></a>
+
+                            <button class="btn btn-info-outline" id="mobile-dropdown"><span class="glyphicon glyphicon-align-justify" style="font-size: 28px"></span></button>
+                        </div>
+                        <div class="col-md-10">
+                            <nav class="nav-header" id="header-desktop">
+                                <ul class="menu">
+                                    <li class="menu__item active">
+                                        <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <nav id="header-mobile">
+                                <ul>
+                                    <li>
+                                        <a href="/dashboard/">Dashboard <span class="font-size-14 glyphicon glyphicon-dashboard"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logs/">Activity <span class="font-size-14 glyphicon glyphicon-list-alt"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/account/">Account <span class="font-size-14 glyphicon glyphicon-user"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout/">Logout <span class="font-size-14 glyphicon glyphicon-off"></span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="fixed-top-anchor"></section>
+        <section id="fixed-top" class="search-bg">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 search-bg__text-container">
+                            <div class="col-md-8 col-md-offset-2 col-sm-12 padding-0">
+                                <!-- <h4 class="text-uppercase">Discover and Read Innovative Ideas</h4> -->
+                                <form action="/search/" method="POST"> {% csrf_token %}
+                                    <input name="search" type="text" class="form-control mySearch" placeholder="Search book, author, etc...">
                                 </form>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <hr>
-    <a class="" href="/logout/">Logout</a>
-</div>
+        <section id="books-top">
+            <div class="container margin-top-bottom-30">
+                <div class="padding-0">
+                    <div class="book-view book-view--colTitle">
+                        <div class="row">
+                            <div class="col-xs-4 col-book-title">
+                                <p class="single-line text-uppercase text-bold">Book Title</p>
+                            </div>
+                            <div class="col-xs-3 col-author">
+                                <p class="single-line text-uppercase text-bold">Author</p>
+                            </div>
+                            <div class="col-xs-3 col-published">
+                                <p class="single-line text-uppercase text-bold">Date Published</p>
+                            </div>
+                            <div class="col-xs-2 col-reads">
+                                <p class="single-line text-uppercase text-bold text-center">Reads</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% for book in books %}
+                <div class="padding-0">
+                    <div class="book-view">
+                        <div class="row select">
+                            <a class="text-decoration-none text-black" href="#abstract-view" role="button" data-toggle="modal">
+                                <div class="col-xs-4 col-book-title">
+                                    <p class="single-line">{{ book.title }}</p>
+                                    <p class="text-gray" id="col-author-mobile">{{ book.author }}</p>
+                                </div>
+                                <div class="col-xs-3 col-author">
+                                    <p class="single-line font-size-14">{{ book.author }}</p>
+                                </div>
+                                <div class="col-xs-3 col-published">
+                                    <p class="single-line font-size-14">{{ book.date_added }}</p>
+                                </div>
+                                <div class="col-xs-2 text-center col-reads">
+                                    <p class="single-line font-size-14">{{ book.reads}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="abstract-view">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-content--dark">
+                <div class="modal-header">
+                    <button class="close text-white" data-dismiss="modal">&times;</button>
+                    <h4 class="text-primary padding-0 margin-0">Book Title</h4>
+                    <p class="text-primary">Author</p>
+                    <p class="text-gray font-size-14">Date Published</p>
+
+                    <br>
+
+                    <button type="button" class="btn btn-primary btn text-uppercase">Borrow</button>
+                    {% if user.is_staff %}
+                        <button type="button" class="btn btn-success btn"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button type="button" class="btn btn-danger btn"><span class="glyphicon glyphicon-trash"></span></button>
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-primary">Abstract</h5>
+                    <br>
+
+                    <p class="text-gray">Abstract goes here...</p>
+
+                    <br>
+                </div> <!-- end of modal-body -->
+            </div> <!-- end of modal-content -->
+        </div> <!-- end of modal-dialog -->
+    </div> <!-- end of abstract-view -->
+    
 </body>
 </html>
