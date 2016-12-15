@@ -101,21 +101,23 @@
         			<div class="col-md-8 col-sm-12 col-xs-12">
         				<hr>
         				<img class="account-img" src="{% static 'img/square.jpg' %}">
-        				<form class="margin-bottom-30">
+        				<form class="margin-bottom-30" action="/account/" method="POST">
+                            {% csrf_token %}
+                            <input hidden value="{{user.id}}" name="id">
         					<div class="row">
         						<div class="col-md-12 col-sm-12 col-xs-12">
         							<div class="form-group">
         								<label for="account-username">Username</label>
-		                                <input type="text" class="form-control" id="account-username" name="username">
+		                                <input type="text" class="form-control" id="account-username" name="username" value="{{user.username}}">
 		                            </div>
 		                            <div class="form-group">
 		                            	<div class="col-xs-6 padding-0">
 							                <label for="account-firstname">First Name</label>
-		                                	<input type="text" class="form-control" id="account-firstname" name="firstname">
+		                                	<input type="text" class="form-control" id="account-firstname" name="firstname" value="{{user.first_name}}">
 							            </div>
 							            <div class="col-xs-6 padding-0">
 							            	<label for="account-lastname">Last Name</label>
-		                                	<input type="text" class="form-control" id="account-lastname" name="lastname">
+		                                	<input type="text" class="form-control" id="account-lastname" name="lastname" value="{{user.last_name}}">
 							            </div>
 		                            </div>			
         						</div>
@@ -127,23 +129,26 @@
         						<div class="col-md-12 col-sm-12 col-xs-12">
         							<div class="form-group">
         								<label for="account-email">Email</label>
-		                                <input type="email" class="form-control" id="account-email" name="username">
-		                            </div>
-		                            <div class="form-group">
-						                <label for="account-contact">Contact Number</label>
-	                                	<input type="text" class="form-control" id="account-contact" name="firstname">
+		                                <input type="email" class="form-control" id="account-email" name="email" value="{{user.email}}">
 		                            </div>
 		                            <div class="form-group">
 		                            	<div class="col-sm-6 col-xs-12 padding-0">
 		                            		<button type="submit" class="btn btn-primary form-control">Submit <span class="glyphicon glyphicon-send"></span></button>
 		                            	</div>
-		                            	<div class="col-sm-6 col-xs-12 text-right">
-		                            		<a class="text-gray font-size-14" href=""><br>Permanently delete my account</a>
-		                            	</div>
+		                            	<!--<div class="col-sm-6 col-xs-12 text-right">-->
+		                            		<!--<a class="text-gray font-size-14" href=""><br>Permanently delete my account</a>-->
+		                            	<!--</div>-->
 		                            </div>			
         						</div>
         					</div>
         				</form>
+                        {% if message != "" %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% else %}
+
+                        {% endif%}
         			</div>
         		</div>
         		<div class="row margin-bottom-30">

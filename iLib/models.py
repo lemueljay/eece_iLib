@@ -12,9 +12,10 @@ class Book(models.Model):
     reads = models.IntegerField(default=0)
     stat = models.BooleanField(default=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateField(null=True)
 
     def __unicode__(self):
-        return u'%s %s %s %s %s %s' % (self.id, self.title, self.author, self.abstract, self.date_added, self.stat)
+        return u'%s %s %s %s %s %s %s' % (self.id, self.title, self.author, self.abstract, self.date_added, self.stat, self.date_published)
 
 
 class Log(models.Model):
@@ -22,3 +23,6 @@ class Log(models.Model):
     book = models.ForeignKey(Book)
     return_status = models.BooleanField(default=False)
     request_status = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return u'%s %s %s %s' % (self.user.username , self.book.title, self.return_status, self.request_status)

@@ -87,11 +87,6 @@
                     <div class="col-md-6 col-sm-12">
                         <hr>            
                         <h5 class="text-uppercase">Book Requests</h5>
-                        <div class="col-md-12 padding-0 margin-bottom-30">
-                            <form action="#" method="POST"> {% csrf_token %}
-                                <input name="search" type="text" class="form-control" placeholder="Search...">
-                            </form>
-                        </div>
                         <table class="table table-striped">
                             <tr>
                                 <th>Details</th>
@@ -124,11 +119,6 @@
                     <div class="col-md-6 col-sm-12">
                         <hr>
                         <h5 class="text-uppercase">Book Returns</h5>
-                        <div class="col-md-12 padding-0 margin-bottom-30">
-                            <form action="#" method="POST"> {% csrf_token %}
-                                <input name="search" type="text" class="form-control" placeholder="Search...">
-                            </form>
-                        </div>
                         <table class="table table-striped">
                             <tr>
                                 <th>Details</th>
@@ -156,16 +146,25 @@
                     <div class="col-md-6 col-sm-12">
                         <hr>            
                         <h5 class="text-uppercase">For Approval</h5>
-                        <div class="col-md-12 padding-0 margin-bottom-30">
-                            <form action="#" method="POST"> {% csrf_token %}
-                                <input name="search" type="text" class="form-control" placeholder="Search...">
-                            </form>
-                        </div>
                         <table class="table table-striped">
                             <tr>
                                 <th>Details</th>
                                 <th>Action</th>
                             </tr>
+                            {% for log in logs %}
+                            {% if log.request_status %}
+                             <tr>
+                                <td>{{ log.book.title }}</td>
+                                <td>
+                                        <form action="/cancel/" method="POST" class="col-xs-12 padding-0"> {% csrf_token %}
+                                            <input name="logid" type="hidden" value="{{log.id}}">
+                                            <input name="bookid" type="hidden" value="{{log.book.id}}">
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </form>
+                                    </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
                             
                         </table>
                     </div>
@@ -173,16 +172,17 @@
                     <div class="col-md-6 col-sm-12">
                         <hr>
                         <h5 class="text-uppercase">On-hand</h5>
-                        <div class="col-md-12 padding-0 margin-bottom-30">
-                            <form action="#" method="POST"> {% csrf_token %}
-                                <input name="search" type="text" class="form-control" placeholder="Search...">
-                            </form>
-                        </div>
                         <table class="table table-striped">
                             <tr>
                                 <th>Details</th>
                             </tr>
-                        
+                            {% for log in logs%}
+                            {% if not log.request_status %}
+                             <tr>
+                                <td>{{ log.book.title }}</td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
                         </table>
                     </div>
                 {% endif %}

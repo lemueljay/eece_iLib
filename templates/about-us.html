@@ -32,45 +32,50 @@
         <div class="site-nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2">
-                        <a href="#"><img class="center-block" src="{% static 'img/zeebuks.png' %}" alt=""></a>
+                    {% if auth %}
+                         <div class="col-md-2">
+                            <a href="#"><img class="center-block" src="{% static 'img/zeebuks.png' %}" alt=""></a>
 
-                        <button class="btn btn-info-outline" id="mobile-dropdown"><span class="glyphicon glyphicon-align-justify" style="font-size: 28px"></span></button>
-                    </div>
-                    <div class="col-md-10">
-                        <nav class="nav-header" id="header-desktop">
-                            <ul class="menu">
-                                <li class="menu__item">
-                                    <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav id="header-mobile">
-                            <ul>
-                                <li>
-                                    <a href="/dashboard/">Dashboard <span class="font-size-14 glyphicon glyphicon-dashboard"></span></a>
-                                </li>
-                                <li>
-                                    <a href="/logs/">Activity <span class="font-size-14 glyphicon glyphicon-list-alt"></span></a>
-                                </li>
-                                <li>
-                                    <a href="/account/">Account <span class="font-size-14 glyphicon glyphicon-user"></span></a>
-                                </li>
-                                <li>
-                                    <a href="/logout/">Logout <span class="font-size-14 glyphicon glyphicon-off"></span></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                            <button class="btn btn-info-outline" id="mobile-dropdown"><span class="glyphicon glyphicon-align-justify" style="font-size: 28px"></span></button>
+                        </div>
+                        <div class="col-md-10">
+                            <nav class="nav-header" id="header-desktop">
+                                <ul class="menu">
+                                    <li class="menu__item">
+                                        <a href="/dashboard/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logs/"><span class="glyphicon glyphicon-list-alt"></span> Activity</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/account/"><span class="glyphicon glyphicon-user"></span> Account</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a href="/logout/"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <nav id="header-mobile">
+                                <ul>
+                                    <li>
+                                        <a href="/dashboard/">Dashboard <span class="font-size-14 glyphicon glyphicon-dashboard"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logs/">Activity <span class="font-size-14 glyphicon glyphicon-list-alt"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/account/">Account <span class="font-size-14 glyphicon glyphicon-user"></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout/">Logout <span class="font-size-14 glyphicon glyphicon-off"></span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    {% else %}
+                        EDSEL
+                    {% endif %}
+
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+from django.views.generic import View
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
@@ -28,7 +29,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/login/')
+    return HttpResponseRedirect('/')
 
 
 def signup(request):
@@ -70,8 +71,9 @@ def addbooks(request):
         title = request.POST['title'].strip(' \t\n\r')
         author = request.POST['author'].strip(' \t\n\r')
         abstract = request.POST['abstract'].strip(' \t\n\r')
+        datepub = request.POST['datepublished']
         if (title != '') and (author != '') and (abstract != ''):
-            query = Book(title=title, author=author, abstract=abstract)
+            query = Book(title=title, author=author, abstract=abstract, date_published=datepub)
             query.save()
             message = {'status': True, 'message': 'Book successfully added!'}
             return render(request, 'addbooks.html', {'message': message})
@@ -129,10 +131,9 @@ def cancel(request):
         book = Book.objects.get(id=bookid)
         book.stat = True
         book.save()
-        logid = request.POST['logid']
-        log = Log.objects.get(id=logid)
+        log = Log.objects.get(book=book)
         log.delete()
-        return HttpResponseRedirect('/dashboard/')
+        return HttpResponseRedirect('/logs/')
 
 
 def accept(request):
@@ -167,14 +168,64 @@ def logs(request):
         x.full_name = x.user.get_full_name()
     return render(request, 'logs.html', {'logs': logs})
 
-def account(request):
-    return render(request, 'account.html')
+
+class Account(View):
+    def get(self, request):
+        user = request.user
+        message = ""
+        return render(request, 'account.html', {"user": user, "message": message})
+
+    def post(self, request):
+        id = request.POST['id']
+        username = request.POST['username']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        email = request.POST['email']
+        user = User.objects.get(id=id)
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        user = request.user
+        message = "Changes successfully saved!"
+        return render(request, 'account.html', {"user": user, "message": message})
+
 
 def account_password(request):
-    return render(request, 'account-password.html')
+    if request.method == 'POST':
+        oldp = request.POST['oldp']
+        newp = request.POST['newp']
+        conp = request.POST['conp']
+        user = request.user
+        wews = True
+        message = "LEMUEL GWAPO"
+        pusher = auth.authenticate(username=user.username, password=oldp)
+        if pusher is not None:
+            if newp == conp:
+                user.set_password(newp)
+                user.save()
+                message = "GWAPO KO! WOOOOH! PASSWORD SET!"
+                return render(request, 'account-password.html', {'message': message, 'wews': wews})
+            else:
+                message = "Password did not match!"
+                return render(request, 'account-password.html', {'message': message, 'wews': wews})
+        else:
+            message = "Password did not match!"
+            return render(request, 'account-password.html', {'message': message, 'wews': wews})
+
+    else:
+        wews = False
+        message = "LEMUEL GWAPO!"
+        return render(request, 'account-password.html', {'message': message, 'wews': wews})
+
 
 def about(request):
-    return render(request, 'about-us.html')
+    if request.user.is_authenticated():
+        auth = True
+    else:
+        auth = False
+    return render(request, 'about-us.html', {"auth": auth})
 
 
 def search(request):

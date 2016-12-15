@@ -24,6 +24,8 @@
     <!-- Custom JS -->
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
 
+    <script type="text/javascript" src="{% static 'feature.js' %}"></script>
+
     <link rel="shortcut icon" href="" />
     <title>iLib</title>
 </head>
@@ -86,9 +88,15 @@
                         <div class="col-xs-12 search-bg__text-container">
                             <div class="col-md-8 col-md-offset-2 col-sm-12 padding-0">
                                 <!-- <h4 class="text-uppercase">Discover and Read Innovative Ideas</h4> -->
+
                                 <form action="/search/" method="POST"> {% csrf_token %}
                                     <input name="search" type="text" class="form-control mySearch" placeholder="Search book, author, etc...">
                                 </form>
+                                {% if user.is_staff %}
+                                <form action="/addbooks/" method="GET">
+                                    <button class="btn btn-default form-control">ADD BOOK</button>
+                                </form>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -121,7 +129,7 @@
                 <div class="padding-0">
                     <div class="book-view">
                         <div class="row select">
-                            <a class="text-decoration-none text-black" href="#abstract-view" role="button" data-toggle="modal">
+                            <a class="text-decoration-none text-black" href="#abstract-view{{book.id}}" role="button" data-toggle="modal">
                                 <div class="col-xs-4 col-book-title">
                                     <p class="single-line">{{ book.title }}</p>
                                     <p class="text-gray" id="col-author-mobile">{{ book.author }}</p>
@@ -130,7 +138,7 @@
                                     <p class="single-line font-size-14">{{ book.author }}</p>
                                 </div>
                                 <div class="col-xs-3 col-published">
-                                    <p class="single-line font-size-14">{{ book.date_added }}</p>
+                                    <p class="single-line font-size-14">{{ book.date_published }}</p>
                                 </div>
                                 <div class="col-xs-2 text-center col-reads">
                                     <p class="single-line font-size-14">{{ book.reads}}</p>
@@ -146,37 +154,58 @@
 
 
 
+    {% for book in books%}
+        <div class="modal fade" id="abstract-view{{book.id}}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-content--dark">
+                    <div class="modal-header">
+                        <button class="close text-white" data-dismiss="modal">&times;</button>
+                        <h4 class="text-primary padding-0 margin-0">{{book.title}}</h4>
+                        <p class="text-primary">{{book.author}}</p>
+                        <p class="text-gray font-size-14">{{book.date_added}}</p>
+
+                        <br>
+                        {% if book.stat %}
+                        <form action="/borrow/" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="hidden" value="{{book.id}}" name="bookid">
+                            <button type="submit" class="btn btn-primary btn text-uppercase">Borrow</button>
+                        </form>
+                        {% else %}
+                        <form action="" method="">
+                            {% csrf_token %}
+                            <input type="text" class="hidden" value="{{book.id}}" name="bookid">
+                            <button type="" class="btn btn-warning btn text-uppercase" disabled="disabled">NOT AVAILABLE</button>
+                        </form>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <form action="/editbook/" method="GET">
+                                <input type="text" class="hidden" value="{{book.id}}" name="bookid">
+                                <button type="submit" class="btn btn-success btn"><span class="glyphicon glyphicon-edit"></span></button>
+                            </form>
+
+                            <form action="/deletebook/" method="POST">
+                                {% csrf_token %}
+                                <input type="text" class="hidden" value="{{book.id}}" name="bookid">
+                                <button type="submit" class="btn btn-danger btn"><span class="glyphicon glyphicon-trash"></span></button>
+                            </form>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="text-primary">Abstract</h5>
+                        <br>
+
+                        <p class="text-gray">{{book.abstract}}</p>
+
+                        <br>
+                    </div> <!-- end of modal-body -->
+                </div> <!-- end of modal-content -->
+            </div> <!-- end of modal-dialog -->
+        </div> <!-- end of abstract-view -->
+    {% endfor %}
 
 
-    <div class="modal fade" id="abstract-view">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content modal-content--dark">
-                <div class="modal-header">
-                    <button class="close text-white" data-dismiss="modal">&times;</button>
-                    <h4 class="text-primary padding-0 margin-0">Book Title</h4>
-                    <p class="text-primary">Author</p>
-                    <p class="text-gray font-size-14">Date Published</p>
-
-                    <br>
-
-                    <button type="button" class="btn btn-primary btn text-uppercase">Borrow</button>
-                    {% if user.is_staff %}
-                        <button type="button" class="btn btn-success btn"><span class="glyphicon glyphicon-edit"></span></button>
-                        <button type="button" class="btn btn-danger btn"><span class="glyphicon glyphicon-trash"></span></button>
-                    {% else %}
-                    {% endif %}
-                </div>
-                <div class="modal-body">
-                    <h5 class="text-primary">Abstract</h5>
-                    <br>
-
-                    <p class="text-gray">Abstract goes here...</p>
-
-                    <br>
-                </div> <!-- end of modal-body -->
-            </div> <!-- end of modal-content -->
-        </div> <!-- end of modal-dialog -->
-    </div> <!-- end of abstract-view -->
     
 </body>
 </html>
